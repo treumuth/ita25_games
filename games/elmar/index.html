@@ -1,21 +1,111 @@
 <!DOCTYPE html>
-<html lang="et">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Elmar — mäng</title>
-  <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; font-family: system-ui, sans-serif; background: #0a0e12; color: #e8f0ff; display: grid; place-items: center; padding: 1.5rem; }
-    a { color: #5eead4; }
-    .box { text-align: center; max-width: 28rem; line-height: 1.6; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Potato Clicker</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="box">
-    <h1>Elmar</h1>
-    <p>Siia tuleb sinu mäng. Asenda see fail või lisa siia oma HTML/CSS/JS.</p>
-    <p><a href="../../index.html">← tagasi dashboardile</a></p>
+
+  <div id="left-panel">
+    <div id="upgrades-section">
+      <h2>Upgrades</h2>
+      <div id="upgrades-list"></div>
+    </div>
+    <div id="buildings-section">
+      <h2>Buildings</h2>
+      <div id="buildings-list"></div>
+    </div>
   </div>
+
+  <div id="center-panel">
+    <div id="game-title">Potato Clicker</div>
+    <div id="potato-count">0 potatoes</div>
+    <div id="potato-per-sec">0 per second</div>
+    <div id="potato-wrapper">
+      <svg id="potato" viewBox="0 0 190 175" xmlns="http://www.w3.org/2000/svg">
+        <!-- Shadow / dirt at base -->
+        <ellipse cx="95" cy="162" rx="52" ry="8" fill="rgba(40,20,5,0.55)"/>
+        <!-- Main potato body — warm irregular oval -->
+        <ellipse cx="95" cy="91" rx="68" ry="72" fill="#c17a32" transform="rotate(-7,95,91)"/>
+        <!-- Slightly lighter belly highlight -->
+        <ellipse cx="85" cy="85" rx="54" ry="58" fill="#cc8840" transform="rotate(-7,85,85)"/>
+        <!-- Soft warm highlight on upper-left -->
+        <ellipse cx="72" cy="65" rx="26" ry="18" fill="rgba(255,210,130,0.28)" transform="rotate(-18,72,65)"/>
+        <!-- Skin texture bump — top -->
+        <ellipse cx="95" cy="30" rx="18" ry="10" fill="#b56d28" transform="rotate(-4,95,30)"/>
+        <!-- Skin texture bump — bottom-right -->
+        <ellipse cx="140" cy="130" rx="14" ry="9" fill="#a86020" transform="rotate(15,140,130)"/>
+        <!-- Skin texture bump — left -->
+        <ellipse cx="34" cy="100" rx="10" ry="13" fill="#b36825" transform="rotate(-10,34,100)"/>
+        <!-- Eye / bud hole 1 -->
+        <ellipse cx="78" cy="78" rx="5.5" ry="4.5" fill="#6b3a10" transform="rotate(-10,78,78)"/>
+        <ellipse cx="78" cy="77" rx="2.5" ry="2" fill="#3d1e08"/>
+        <!-- Eye / bud hole 2 -->
+        <ellipse cx="112" cy="105" rx="4.5" ry="3.8" fill="#6b3a10" transform="rotate(8,112,105)"/>
+        <ellipse cx="112" cy="104" rx="2" ry="1.8" fill="#3d1e08"/>
+        <!-- Eye / bud hole 3 — tiny one -->
+        <ellipse cx="60" cy="112" rx="3.5" ry="3" fill="#6b3a10" transform="rotate(-5,60,112)"/>
+        <ellipse cx="60" cy="112" rx="1.5" ry="1.4" fill="#3d1e08"/>
+        <!-- Sprout stem -->
+        <path d="M95,28 Q92,18 94,8" stroke="#5a9e30" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+        <!-- Left leaf -->
+        <path d="M94,18 Q84,10 78,14 Q83,20 94,18Z" fill="#6ab835" stroke="#4a8a20" stroke-width="0.8"/>
+        <!-- Right leaf -->
+        <path d="M94,13 Q104,5 110,9 Q105,16 94,13Z" fill="#7cc840" stroke="#4a8a20" stroke-width="0.8"/>
+        <!-- Tiny top leaf -->
+        <path d="M94,8 Q90,2 93,0 Q97,2 94,8Z" fill="#88d848" stroke="#4a8a20" stroke-width="0.6"/>
+        <!-- Specular glint -->
+        <ellipse cx="68" cy="62" rx="8" ry="5" fill="rgba(255,245,200,0.22)" transform="rotate(-20,68,62)"/>
+      </svg>
+    </div>
+    <div id="click-power-display">+1 per click</div>
+    <div id="frenzy-banner" class="hidden"></div>
+    <button id="ascend-btn" style="display:none">Ascend</button>
+    <div id="news-bar">
+      <span id="news-text">Welcome to Potato Clicker! Click the potato to begin...</span>
+    </div>
+  </div>
+
+  <div id="right-panel">
+    <h2>Statistics</h2>
+    <div class="stat-row"><span>Total earned</span><span id="stat-total">0</span></div>
+    <div class="stat-row"><span>Total clicks</span><span id="stat-clicks">0</span></div>
+    <div class="stat-row"><span>Click power</span><span id="stat-click">1</span></div>
+    <div class="stat-row"><span>Passive / sec</span><span id="stat-passive">0</span></div>
+
+    <h2>Prestige</h2>
+    <div class="stat-row"><span>Ascensions</span><span id="stat-ascensions">0</span></div>
+    <div class="stat-row"><span>Potato Seeds</span><span id="stat-seeds">0</span></div>
+    <div class="stat-row"><span>Prod. bonus</span><span id="stat-prestige-mult">x1.00</span></div>
+
+    <div id="achievements-section">
+      <h2>Achievements</h2>
+      <div id="achievements-list"></div>
+    </div>
+  </div>
+
+  <div id="global-tooltip"></div>
+
+  <div id="ascension-overlay" class="hidden">
+    <div id="ascension-panel">
+      <div id="asc-header">Ascension</div>
+      <div id="asc-info">
+        <div class="asc-info-row">Seeds earned this run: <strong id="asc-new-seeds">0</strong></div>
+        <div class="asc-info-row">Total seeds after: <strong id="asc-total-seeds">0</strong></div>
+        <div class="asc-info-row">Available to spend: <strong id="asc-avail-seeds">0</strong></div>
+        <div class="asc-info-row">Production bonus: <strong id="asc-bonus-pct">0</strong>% (base) + upgrades</div>
+      </div>
+      <div id="asc-upgrades-header">Prestige Upgrades</div>
+      <div id="prestige-upgrades-list"></div>
+      <div id="asc-actions">
+        <button id="asc-confirm">Ascend Now</button>
+        <button id="asc-cancel">Go Back</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
 </body>
 </html>
