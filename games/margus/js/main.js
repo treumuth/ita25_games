@@ -2,12 +2,12 @@
   "use strict";
 
   var TAGLINES = [
-    "Jänes ei maksa maksu. Porgand ka mitte. Filosoofiline.",
+    "Jänes ei maksa makse. Porgandid ka mitte. Filosoofiline.",
     "Kui jänes sööb, siis maailm nutab. Või mitte. Aga sina küll.",
-    "See mäng on tasemel: see tasemel on madal ja see on OK.",
+    "See mäng on tasemel: see tase on madal ja see on OK.",
     "Porgand on juur. Jänes on probleem. Kivi on lahendus.",
     "Teadus ei tea, miks see mäng on. Aga Margus teab.",
-    "Hoiatus: ei sisalda tegelikku toitumisalast.",
+    "Hoiatus: ei sisalda tegelikku toitumisalast teavet."
   ];
 
   var canvas = document.getElementById("game");
