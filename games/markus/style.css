@@ -1,0 +1,177 @@
+/* ── RESET & BASE ─────────────────────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0a0a0f;
+  overflow: hidden;
+  font-family: 'Courier New', monospace;
+}
+
+canvas {
+  display: block;
+  cursor: none;
+}
+
+/* ── UI OVERLAY ───────────────────────────────────────────────────────────── */
+#ui {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  padding: 16px;
+}
+
+#hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* ── HEALTH BAR ───────────────────────────────────────────────────────────── */
+#health-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#health-label {
+  color: #ff4444;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+#health-bar-bg {
+  width: 200px;
+  height: 14px;
+  background: #1a0a0a;
+  border: 1px solid #ff4444;
+}
+
+#health-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #ff2222, #ff6666);
+  transition: width 0.1s;
+}
+
+/* ── WEAPON INFO ──────────────────────────────────────────────────────────── */
+#weapon-info {
+  text-align: right;
+  color: #eee;
+}
+
+#weapon-name {
+  font-size: 18px;
+  letter-spacing: 4px;
+  color: #ffdd44;
+  text-shadow: 0 0 10px #ffaa00;
+}
+
+#ammo-display {
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 2px;
+  letter-spacing: 2px;
+}
+
+#reload-msg {
+  font-size: 11px;
+  color: #ff8844;
+  margin-top: 2px;
+  letter-spacing: 2px;
+  animation: blink 0.5s infinite;
+  display: none;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+/* ── KILL COUNTER ─────────────────────────────────────────────────────────── */
+#kill-counter {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ff4444;
+  font-size: 13px;
+  letter-spacing: 4px;
+}
+
+/* ── PICKUP HINT ──────────────────────────────────────────────────────────── */
+#pick-hint {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #44ffaa;
+  font-size: 13px;
+  letter-spacing: 3px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 8px 20px;
+  border: 1px solid #44ffaa;
+  display: none;
+  pointer-events: none;
+}
+
+/* ── LEGEND ───────────────────────────────────────────────────────────────── */
+#legend {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  color: #555;
+  font-size: 10px;
+  letter-spacing: 2px;
+  line-height: 2;
+  pointer-events: none;
+}
+
+/* ── GAME OVER SCREEN ─────────────────────────────────────────────────────── */
+#game-over {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ff2222;
+  display: none;
+}
+
+#game-over h1 {
+  font-size: 64px;
+  letter-spacing: 12px;
+  text-shadow: 0 0 40px #ff0000;
+}
+
+#game-over p {
+  color: #aaa;
+  margin-top: 20px;
+  letter-spacing: 4px;
+  font-size: 14px;
+}
+
+#restart-btn {
+  margin-top: 30px;
+  padding: 14px 40px;
+  background: transparent;
+  border: 1px solid #ff2222;
+  color: #ff2222;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  letter-spacing: 4px;
+  cursor: pointer;
+  pointer-events: all;
+  transition: background 0.2s, color 0.2s;
+}
+
+#restart-btn:hover {
+  background: #ff2222;
+  color: #000;
+}
