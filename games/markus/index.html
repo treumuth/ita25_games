@@ -1,21 +1,46 @@
 <!DOCTYPE html>
-<html lang="et">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Markus — mäng</title>
-  <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; font-family: system-ui, sans-serif; background: #0a0e12; color: #e8f0ff; display: grid; place-items: center; padding: 1.5rem; }
-    a { color: #5eead4; }
-    .box { text-align: center; max-width: 28rem; line-height: 1.6; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="box">
-    <h1>Markus</h1>
-    <p>Siia tuleb sinu mäng. Asenda see fail või lisa siia oma HTML/CSS/JS.</p>
-    <p><a href="../../index.html">← tagasi dashboardile</a></p>
+
+  <canvas id="c"></canvas>
+
+  <div id="ui">
+    <div id="hud">
+      <div id="health-bar-wrap">
+        <div id="health-label">INTEGRITY</div>
+        <div id="health-bar-bg">
+          <div id="health-bar" style="width:100%"></div>
+        </div>
+      </div>
+      <div id="weapon-info">
+        <div id="weapon-name">PISTOL</div>
+        <div id="ammo-display">20 / 20</div>
+        <div id="reload-msg">— RELOADING —</div>
+      </div>
+    </div>
+    <div id="kill-counter">ELIMINATED: 0</div>
   </div>
+
+  <div id="pick-hint">[E] PICK UP WEAPON</div>
+
+  <div id="legend">
+    ▲ RED — standard<br>
+    ● PURPLE — tank (2× HP, slow)<br>
+    ▲ YELLOW — scout (fast, 0.5× dmg)
+  </div>
+
+  <div id="game-over">
+    <h1>TERMINATED</h1>
+    <p id="final-score">ELIMINATED: 0</p>
+    <button id="restart-btn" onclick="restartGame()">[ RESTART ]</button>
+  </div>
+
+  <script src="game.js"></script>
 </body>
 </html>
